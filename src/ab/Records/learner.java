@@ -36,7 +36,7 @@ public class learner{
     public int explore(double angle, Shot shot){
             for(record R: Table /*each record in table check if it is close to the given shot ie within the range of given threshold*/){
                     if(R.angle <= angle+alpha && R.angle >= angle-alpha){
-                        if(R.shot.dx <= 10 && R.shot.dy < 10){
+                        if(R.shot.getDx() <= 10 && R.shot.getDy() < 10){
                             if(R.ack == 1){
                                 return 1;
                             }

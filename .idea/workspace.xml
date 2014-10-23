@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f5a4be5-fecb-4150-94f8-59a19afb91e1" name="Default" comment="inital">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Agent.jar" afterPath="$PROJECT_DIR$/Agent.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ab/demo/NaiveAgent.class" afterPath="$PROJECT_DIR$/src/ab/demo/NaiveAgent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ab/demo/NaiveAgent.java" afterPath="$PROJECT_DIR$/src/ab/demo/NaiveAgent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ab/Records/record.java" afterPath="$PROJECT_DIR$/src/ab/Records/record.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ab/Records/learner.java" afterPath="$PROJECT_DIR$/src/ab/Records/learner.java" />
     </list>
     <ignored path="AngryBirds.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,8 +28,8 @@
       <file leaf-file-name="NaiveAgent.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ab/demo/NaiveAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.8867924" vertical-offset="2397" max-vertical-offset="4879">
-              <caret line="157" column="16" selection-start-line="157" selection-start-column="16" selection-end-line="157" selection-end-column="16" />
+            <state vertical-scroll-proportion="-5.962264" vertical-offset="2370" max-vertical-offset="4879">
+              <caret line="165" column="41" selection-start-line="165" selection-start-column="41" selection-end-line="165" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -43,10 +40,10 @@
       <file leaf-file-name="learner.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ab/Records/learner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.52060735" vertical-offset="661" max-vertical-offset="1190">
-              <caret line="53" column="32" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.47939262" vertical-offset="425" max-vertical-offset="1190">
+              <caret line="38" column="41" selection-start-line="38" selection-start-column="41" selection-end-line="38" selection-end-column="41" />
               <folding>
-                <element signature="e#0#1654#0" expanded="true" />
+                <element signature="e#0#1664#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -645,11 +642,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ab/demo/NaiveAgent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.8867924" vertical-offset="2397" max-vertical-offset="4879">
-          <caret line="157" column="16" selection-start-line="157" selection-start-column="16" selection-end-line="157" selection-end-column="16" />
+        <state vertical-scroll-proportion="-5.962264" vertical-offset="2370" max-vertical-offset="4879">
+          <caret line="165" column="41" selection-start-line="165" selection-start-column="41" selection-end-line="165" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ab/demo/other/Shot.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="194" max-vertical-offset="884">
+          <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -666,20 +671,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ab/demo/other/Shot.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="194" max-vertical-offset="884">
-          <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ab/Records/learner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52060735" vertical-offset="661" max-vertical-offset="1190">
-          <caret line="53" column="32" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.47939262" vertical-offset="425" max-vertical-offset="1190">
+          <caret line="38" column="41" selection-start-line="38" selection-start-column="41" selection-end-line="38" selection-end-column="41" />
           <folding>
-            <element signature="e#0#1654#0" expanded="true" />
+            <element signature="e#0#1664#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
