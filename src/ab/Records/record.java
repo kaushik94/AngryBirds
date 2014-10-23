@@ -7,38 +7,34 @@ package ab.Records;
 import ab.vision.ABObject;
 
 import java.awt.Point;
-
+import java.awt.image.BufferedImage;
 
 public class record{
 
-    ABObject pig;
-    double distance;
-    Point p = new Point();
-    int score;
+    double angle;
+    public BufferedImage screenshot;
+    double score;
     int ack;
 
-
-    public void addPig(ABObject _pig){
-        pig = _pig;
+    public void addScore(int _score){
+        score = _score;
     }
 
-    public void addDistance(Point _p, double _distance){
-        distance = _distance;
-        p.x = _p.x;
-        p.y = _p.y;
-    }
-
-    public void addAck(ABObject _pig, int _ack){
-        pig = _pig;
+    public void addAck(int _ack){
         ack = _ack;
     }
 
-    public void add(ABObject _pig, Point _p){
-        {
-            pig = _pig;
-            p.x = _p.x;
-            p.y = _p.y;
-        }
+    public void addImage(BufferedImage _screenshot){
+        screenshot = _screenshot;
     }
 
+    public void addAngle(double _angle){
+        angle = _angle;
+    }
+
+    public void add(BufferedImage image, double _angle, int _ack){
+        angle = _angle;
+        screenshot = image;
+        ack = _ack;
+    }
 }
