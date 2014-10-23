@@ -4,40 +4,32 @@
 
 package ab.Records;
 
-import ab.vision.ABObject;
-
-import java.awt.Point;
-
+import ab.demo.other.Shot;
 
 public class record{
 
-    ABObject pig;
-    double distance;
-    Point p = new Point();
+    Shot shot = new Shot();
+    double angle;
     int score;
     int ack;
 
-
-    public void addPig(ABObject _pig){
-        pig = _pig;
+    public void addShot(Shot _shot){
+        shot = _shot;
     }
 
-    public void addDistance(Point _p, double _distance){
-        distance = _distance;
-        p.x = _p.x;
-        p.y = _p.y;
+    public void addAngle(double _angle){
+        angle = _angle;
     }
 
-    public void addAck(ABObject _pig, int _ack){
-        pig = _pig;
+    public void addScore(int _score, int _ack){
+        score = _score ;
         ack = _ack;
     }
 
-    public void add(ABObject _pig, Point _p){
+    public void add(Shot _shot, double _angle){
         {
-            pig = _pig;
-            p.x = _p.x;
-            p.y = _p.y;
+            shot = _shot;
+            angle = _angle;
         }
     }
 
