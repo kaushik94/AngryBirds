@@ -25,9 +25,6 @@ import ab.vision.ABObject;
 import ab.vision.GameStateExtractor.GameState;
 import ab.vision.Vision;
 
-import ab.Records.learner;
-import ab.Records.record;
-
 public class NaiveAgent implements Runnable {
 
 	private ActionRobot aRobot;
@@ -38,8 +35,6 @@ public class NaiveAgent implements Runnable {
 	TrajectoryPlanner tp;
 	private boolean firstShot;
 	private Point prevTarget;
-
-    learner L = new learner(500, 500);
 	// a standalone implementation of the Naive Agent
 	public NaiveAgent() {
 		
@@ -123,12 +118,9 @@ public class NaiveAgent implements Runnable {
 	public GameState solve()
 	{
 
-        ABObject target = null;
 		// capture Image
 		BufferedImage screenshot = ActionRobot.doScreenShot();
 
-        //learning
-        //ManhattanHeuristic MH = new ManhattanHeuristic();
 		// process image
 		Vision vision = new Vision(screenshot);
 
@@ -157,38 +149,11 @@ public class NaiveAgent implements Runnable {
 				Point releasePoint = null;
 				Shot shot = new Shot();
 				int dx,dy;
-                List<record> data = new ArrayList<record>();
-                double angle = 0;
-
 				{
-                    // Get the reference point
-                    Point refPoint = tp.getReferencePoint(sling);
 					// random pick up a pig
-                    //List<record> data = new ArrayList<record>();
-                    //data = MH.getData(refPoinf, pigs);
-                    for(ABObject p: pigs){
-                        record R = new record();
-                        Point t = p.getCenter();
-                        Point dist = new Point(t.x - refPoint.x, t.y-refPoint.y);
-                        //System.out.println(dist);
-                        R.add(p, dist);
-                        //System.out.println(R);
-                        data.add(R);
-                    }
-                    System.out.println(L.Table);
-                    ABObject _target = L.explore(data);
-                    ABObject pig;
-
-                    if(target == null) {
-                        pig = pigs.get(randomGenerator.nextInt(pigs.size()));
-                        target = pig;
-                    }
-                    else {
-                        pig = _target;
-                        target = pig;
-                    }
-
-                    Point _tpt = pig.getCenter();// if the target is very close to before, randomly choose a
+					ABObject pig = pigs.get(randomGenerator.nextInt(pigs.size()));
+					
+					Point _tpt = pig.getCenter();// if the target is very close to before, randomly choose a
 					// point near it
 					if (prevTarget != null && distance(prevTarget, _tpt) < 10) {
 						double _angle = randomGenerator.nextDouble() * Math.PI * 2;
@@ -226,7 +191,8 @@ public class NaiveAgent implements Runnable {
 							releasePoint = tp.findReleasePoint(sling, Math.PI/4);
 						}
 					
-
+					// Get the reference point
+					Point refPoint = tp.getReferencePoint(sling);
 
 
 					//Calculate the tapping time according the bird type 
@@ -293,7 +259,7 @@ public class NaiveAgent implements Runnable {
 						}
 						else
 							System.out.println("Scale is changed, can not execute the shot, will re-segement the image");
-                    }
+					}
 					else
 						System.out.println("no sling detected, can not execute the shot, will re-segement the image");
 				}
@@ -301,13 +267,7 @@ public class NaiveAgent implements Runnable {
 			}
 
 		}
-        record fin = new record();
-        if(state == GameState.WON)
-            fin.addAck(target, 1);
-        else if(state == GameState.LOST)
-            fin.addAck(target, -1);
-        L.exploit(fin);
-        return state;
+		return state;
 	}
 
 	public static void main(String args[]) {
