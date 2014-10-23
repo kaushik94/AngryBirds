@@ -25,6 +25,9 @@ import ab.vision.ABObject;
 import ab.vision.GameStateExtractor.GameState;
 import ab.vision.Vision;
 
+import ab.Records.learner;
+import ab.Records.record;
+
 public class NaiveAgent implements Runnable {
 
 	private ActionRobot aRobot;
@@ -121,6 +124,9 @@ public class NaiveAgent implements Runnable {
 		// capture Image
 		BufferedImage screenshot = ActionRobot.doScreenShot();
 
+        //learning
+        learner L = new learner(0.1, 10, 10);
+
 		// process image
 		Vision vision = new Vision(screenshot);
 
@@ -151,8 +157,9 @@ public class NaiveAgent implements Runnable {
 				int dx,dy;
 				{
 					// random pick up a pig
-					ABObject pig = pigs.get(randomGenerator.nextInt(pigs.size()));
-					
+                        ABObject pig = pigs.get(randomGenerator.nextInt(pigs.size()));
+
+
 					Point _tpt = pig.getCenter();// if the target is very close to before, randomly choose a
 					// point near it
 					if (prevTarget != null && distance(prevTarget, _tpt) < 10) {
