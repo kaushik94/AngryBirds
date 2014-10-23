@@ -1,0 +1,12 @@
+Index: src/ab/Records/record.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/ab/Records/record.java	(date 1414033191000)
++++ src/ab/Records/record.java	(revision )
+@@ -1,1 +1,1 @@
++FUCKED
+\ No newline at end of file
+ 
+\ No newline at end of file
