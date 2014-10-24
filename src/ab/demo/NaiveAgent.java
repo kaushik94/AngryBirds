@@ -39,7 +39,7 @@ public class NaiveAgent implements Runnable {
 	private boolean firstShot;
 	private Point prevTarget;
 
-    learner L = new learner(500, 500);
+    learner L = new learner(10000, 7, 7000);
 	// a standalone implementation of the Naive Agent
 	public NaiveAgent() {
 		
@@ -123,10 +123,11 @@ public class NaiveAgent implements Runnable {
 	public GameState solve()
 	{
 
+        record R = new record();
         ABObject target = null;
 		// capture Image
 		BufferedImage screenshot = ActionRobot.doScreenShot();
-
+        R.addImage(screenshot);
         //learning
         //ManhattanHeuristic MH = new ManhattanHeuristic();
 		// process image
@@ -166,65 +167,29 @@ public class NaiveAgent implements Runnable {
 					// random pick up a pig
                     //List<record> data = new ArrayList<record>();
                     //data = MH.getData(refPoinf, pigs);
-                    for(ABObject p: pigs){
-                        record R = new record();
-                        Point t = p.getCenter();
-                        Point dist = new Point(t.x - refPoint.x, t.y-refPoint.y);
-                        //System.out.println(dist);
-                        R.add(p, dist);
-                        //System.out.println(R);
-                        data.add(R);
-                    }
-                    System.out.println(L.Table);
-                    ABObject _target = L.explore(data);
                     ABObject pig;
 
-                    if(target == null) {
-                        pig = pigs.get(randomGenerator.nextInt(pigs.size()));
-                        target = pig;
-                    }
-                    else {
-                        pig = _target;
-                        target = pig;
-                    }
-
-                    Point _tpt = pig.getCenter();// if the target is very close to before, randomly choose a
-					// point near it
-					if (prevTarget != null && distance(prevTarget, _tpt) < 10) {
-						double _angle = randomGenerator.nextDouble() * Math.PI * 2;
-						_tpt.x = _tpt.x + (int) (Math.cos(_angle) * 10);
-						_tpt.y = _tpt.y + (int) (Math.sin(_angle) * 10);
-						System.out.println("Randomly changing to " + _tpt);
-					}
-
-					prevTarget = new Point(_tpt.x, _tpt.y);
-
-					// estimate the trajectory
-					ArrayList<Point> pts = tp.estimateLaunchPoint(sling, _tpt);
 					
 					// do a high shot when entering a level to find an accurate velocity
-					if (firstShot && pts.size() > 1) 
-					{
-						releasePoint = pts.get(1);
-					}
-					else if (pts.size() == 1)
-						releasePoint = pts.get(0);
-					else if (pts.size() == 2)
-					{
-						// randomly choose between the trajectories, with a 1 in
-						// 6 chance of choosing the high one
-						if (randomGenerator.nextInt(6) == 0)
-							releasePoint = pts.get(1);
-						else
-							releasePoint = pts.get(0);
-					}
-					else
-						if(pts.isEmpty())
-						{
-							System.out.println("No release point found for the target");
-							System.out.println("Try a shot with 45 degree");
-							releasePoint = tp.findReleasePoint(sling, Math.PI/4);
-						}
+                    List<ABObject> blocks = vision.findBlocksMBR();
+                    pigs.addAll(blocks);
+                    releasePoint = L.getTarget(pigs, screenshot, sling, tp);
+                    pig = pigs.get(randomGenerator.nextInt(pigs.size()));
+                    Point _tpt = pig.getCenter();
+                    if(releasePoint == null){
+                                pig = pigs.get(randomGenerator.nextInt(pigs.size()));
+                                _tpt = pig.getCenter();
+                                prevTarget = new Point(_tpt.x, _tpt.y);
+                                ArrayList<Point> pts = tp.estimateLaunchPoint(sling, _tpt);
+                                if(pts.isEmpty()) {
+                                    System.out.println("No release point found for the target");
+                                    System.out.println("Try a shot with 45 degree");
+                                    releasePoint = tp.findReleasePoint(sling, Math.PI / 4);
+                                }
+                                else{
+                                    releasePoint = pts.get(0);
+                                }
+                    }
 					
 
 
@@ -233,6 +198,7 @@ public class NaiveAgent implements Runnable {
 					if (releasePoint != null) {
 						double releaseAngle = tp.getReleaseAngle(sling,
 								releasePoint);
+                        L.exploit(screenshot, releaseAngle, vision);
 						System.out.println("Release Point: " + releasePoint);
 						System.out.println("Release Angle: "
 								+ Math.toDegrees(releaseAngle));
@@ -285,6 +251,7 @@ public class NaiveAgent implements Runnable {
 								{
 									screenshot = ActionRobot.doScreenShot();
 									vision = new Vision(screenshot);
+                                    L.exploit(screenshot, vision);
 									List<Point> traj = vision.findTrajPoints();
 									tp.adjustTrajectory(traj, sling, releasePoint);
 									firstShot = false;
@@ -301,12 +268,6 @@ public class NaiveAgent implements Runnable {
 			}
 
 		}
-        record fin = new record();
-        if(state == GameState.WON)
-            fin.addAck(target, 1);
-        else if(state == GameState.LOST)
-            fin.addAck(target, -1);
-        L.exploit(fin);
         return state;
 	}
 
