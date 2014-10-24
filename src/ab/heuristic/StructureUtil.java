@@ -45,4 +45,27 @@ public class StructureUtil {
 		}
 		return null;
 	}
+	
+	public static List<Structure> combineInnerStructures(List<Structure> distinctStructures){
+		Collections.sort(distinctStructures, new Comparator<Structure>() {
+			@Override
+			public int compare(Structure o1, Structure o2) {
+				return o2.getArea() - o1.getArea();
+			}
+		});
+		for(int i=0;i<distinctStructures.size();i++){
+			for(int j=i+1;j<distinctStructures.size();)
+				if(isInside(distinctStructures.get(i), distinctStructures.get(j))){
+					distinctStructures.get(i).getBlocks().addAll(distinctStructures.get(j).getBlocks());
+					distinctStructures.remove(distinctStructures.get(j));
+				}
+				else
+					j++;
+		}		
+		return distinctStructures;
+	}
+	
+	public static boolean isInside(Structure o1, Structure o2){
+		return o1.x<o2.x&&o1.y<o2.y&&o1.getX2()>o2.getX2()&&o1.getY2()>o2.getY2();
+	}
 }
