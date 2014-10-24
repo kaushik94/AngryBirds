@@ -25,7 +25,7 @@ public class ABUtil {
 		
 		int ey_o2 = o2.y + o2.height;
 		if(
-			(Math.abs(ey_o2 - o1.y) < gap)
+			(Math.abs(ey_o2 - o1.y) < 7)
 			&&  
  			!( o2.x - ex_o1  > gap || o1.x - ex_o2 > gap )
 		  )
